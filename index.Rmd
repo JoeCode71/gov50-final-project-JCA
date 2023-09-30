@@ -4,11 +4,11 @@ author: "Joseph Alexander"
 description: "My final project"
 output:
   distill::distill_article:
-    self_contained: falses   
+    self_contained: false
 ---
 
   
 
 ## Project thoughts
 
-I am interested in exploring data related to economic wellbeing in US States. Subtopics I could pursue include education, immigration, household wealth, wages over time, and GDP by US States.  
+I am interested in exploring data related to economic wellbeing in US States. Subtopics I could pursue include education, immigration, household wealth, wages over time, and GDP by US States.    
