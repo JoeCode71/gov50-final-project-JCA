@@ -9,6 +9,6 @@ output:
 
   
 
-## Project thoughts
+## Proposal
 
-I am interested in exploring data related to economic wellbeing in US States. Subtopics I could pursue include education, immigration, household wealth, wages over time, and GDP by US States.    
+My data set is the American National Election Survey from 2016. 1) How well did immigration policy preferences predict a voter’s choice in the 2016 presidential election? 2) I hypothesize that more restrictive views on immigration significantly predict support for candidate Trump in 2016 to a greater extent than more lax tax policy preferences predict candidate choice. This hypothesis is consistent with the literature on populism that suggests that populist candidates are animated in part over immigration policy preferences. 3) One explanatory variable could be variable 257 which asks respondents about building a wall on the southern border of the US. 4) An outcome variable of interest would be variable 757 which is ask which candidate a respondent voted for in 2016. 5) If greater reported levels of support for a wall on the southern border better predict support for Trump than “conservative” tax policy preferences. Conversely, my hypothesis would be disproven if tax policy preferences better predict 2016 presidential selection better than immigration policy preferences. I could eventually look at more variables for a fuller picture.
