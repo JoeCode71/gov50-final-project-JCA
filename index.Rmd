@@ -15,13 +15,13 @@ My data set is from the following study: Stefano DellaVigna and Ethan Kaplan 200
 
 
 ```{r}
-
+library(tidyverse)
+fn <- read.csv("foxnews.csv")
 
 # Visualization #1 (GOP Vote Share 2000)
-foxnews$V9 <- as.numeric(foxnews$V9)
-foxnews$V12 <- as.numeric(foxnews$V12)
 
-ggplot(data = foxnews, aes(x = V9, y = V12)) + geom_point() + geom_smooth() +
+
+ggplot(data = fn, aes(x = subrf2000, y = gopvoteshare2000)) + geom_point() + geom_smooth() +
   labs(x = "Share of Town Subscribed to Fox News in 2000", y = "Share of Town which voted GOP in 2000",
        title = "Fox News and GOP Vote Share in 2000",
        subtitle = "",
