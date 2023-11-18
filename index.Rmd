@@ -32,19 +32,6 @@ ggplot(data = fn, aes(x = subrf2000, y = gopvoteshare2000)) + geom_point() + geo
 ```
 
 ```{r}
-library(tidyverse)
-fn <- read.csv("foxnews.csv")
-
-share_summary <- fn |>
-  group_by(subrf2000) |>
-  summarize(
-    avg_share = mean(gopvoteshare2000),
-    sd_share = sd(gopvoteshare2000)
-  )
-
-knitr::kable(share_summary)
-
-
 
 ```
 
