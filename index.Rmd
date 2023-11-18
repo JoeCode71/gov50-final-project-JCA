@@ -60,5 +60,5 @@ fn <- read.csv("foxnews.csv")
 
 cor(fn$subrf2000, fn$gopvoteshare2000, use = "pairwise")
 ```
- The above tibble features the number -0.22, which here represents the coefficient which relates a county's level of subscription to Fox News in 2000 to that county's vote share for Republican in the 2000 presidential election. Accepting this coefficient, my analysis would conclude that in 2000, when a county had more subscribers to Fox News, that county's 2000 vote share for the Republican was smaller. However, this analysis could better deal with the missing values for some data points, and it could also control for potential confounding variables.  
+ The above tibble features the number -0.22, which here represents the coefficient which relates a county's level of subscription to Fox News in 2000 to that county's vote share for Republican in the 2000 presidential election. Accepting this coefficient, my analysis would conclude that in 2000, when a county had more subscribers to Fox News, that county's 2000 vote share for the Republican was smaller. However, this analysis could better deal with the missing values for some data points, and it could also  control for potential confounding variables.  
 
