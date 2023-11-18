@@ -49,9 +49,7 @@ knitr::kable(share_summary)
 ```
 
 ```{r}
-library(tidyverse)
-fn <- read.csv("foxnews.csv")
-fn
+
 ```
 
 ```{r}
