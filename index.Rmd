@@ -9,7 +9,7 @@ output:
 
   
 
-## Proposal (to be changed)
+## Proposal
 
 My data set is from the following study: Stefano DellaVigna and Ethan Kaplan 2007. "The Fox News Effect: Media Bias and Voting." 1) Can partisan messages in the news media impact voter choice in elections? 2) I hypothesize that towns with greater levels of subscription to Fox News in 2000 will vote GOP more strongly in the 2000 presidential election. 3) One explanatory variable could be Share of Fox News subscribers in 2000. 4) An outcome variable of interest would be Two-party vote share for the Republicans (2000 Presidential election) 5) If higher shares of Fox News subscribers are associated with higher share of support for the GOP in election 2000, my hypothesis is supported. If higher shares of Fox News subscribers are not associated with higher share of support for the GOP in election 2000, my hypothesis is undermined.
 
@@ -30,4 +30,35 @@ ggplot(data = fn, aes(x = subrf2000, y = gopvoteshare2000)) + geom_point() + geo
     axis.title.y = element_text(size = 8)
   )
 ```
+
+```{r}
+library(tidyverse)
+fn <- read.csv("foxnews.csv")
+
+share_summary <- fn |>
+  group_by(subrf2000) |>
+  summarize(
+    avg_share = mean(gopvoteshare2000),
+    sd_share = sd(gopvoteshare2000)
+  )
+
+knitr::kable(share_summary)
+
+
+
+```
+
+```{r}
+library(tidyverse)
+fn <- read.csv("foxnews.csv")
+fn
+```
+
+```{r}
+library(tidyverse)
+fn <- read.csv("foxnews.csv") 
+
+cor(fn$subrf2000, fn$gopvoteshare2000, use = "pairwise")
+```
+ The above tibble features the number -0.22, which here represents the coefficient which relates a county's level of subscription to Fox News in 2000 to that county's vote share for Republican in the 2000 presidential election. Accepting this coefficient, my analysis would conclude that in 2000, when a county had more subscribers to Fox News, that county's 2000 vote share for the Republican was smaller. However, this analysis could better deal with the missing values for some data points, and it could also control for potential confounding variables.  
 
