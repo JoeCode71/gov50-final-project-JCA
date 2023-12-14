@@ -9,7 +9,7 @@ output:
 
   
 
-INTRODUCTION
+INTRODUCTION 
 
 How does self-reported southern identity impact how one conceptualizes "the South" as a region? Do those who identify strongly with this region have different ideas about how many US states make it up? This question explores the relationship between how we identify with regions and how we conceptualize the boundaries and scope of regions, with a focus on the southern US. I hypothesize that those who identify more strongly with the South tend to think the South is a smaller geographical region. This hypothesis could show that, psychologically speaking, the more intensely one identifies with something the more restrictively they imagine it. This question is interesting because it gathers data on a regional identity in the US. Notions of regional identify might be useful information for the state and federal government in designing interstate policies, and understanding regional identification could be relevant for campaign professionals and political scientists. 
 
