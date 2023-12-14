@@ -1,5 +1,5 @@
 ---
-title: "Gov 50 Final Project"
+title: "Self-reported Southern Identity and Regional Conceptions of 'The South'" 
 author: "Joseph Alexander"
 description: "My final project"
 output:
@@ -9,41 +9,122 @@ output:
 
   
 
-## Proposal
+INTRODUCTION
 
-My data set is from the following study: Stefano DellaVigna and Ethan Kaplan 2007. "The Fox News Effect: Media Bias and Voting." 1) Can partisan messages in the news media impact voter choice in elections? 2) I hypothesize that towns with greater levels of subscription to Fox News in 2000 will vote GOP more strongly in the 2000 presidential election. 3) One explanatory variable could be Share of Fox News subscribers in 2000. 4) An outcome variable of interest would be Two-party vote share for the Republicans (2000 Presidential election) 5) If higher shares of Fox News subscribers are associated with higher share of support for the GOP in election 2000, my hypothesis is supported. If higher shares of Fox News subscribers are not associated with higher share of support for the GOP in election 2000, my hypothesis is undermined.
+How does self-reported southern identity impact how one conceptualizes "the South" as a region? Do those who identify strongly with this region have different ideas about how many US states make it up? This question explores the relationship between how we identify with regions and how we conceptualize the boundaries and scope of regions, with a focus on the southern US. I hypothesize that those who identify more strongly with the South tend to think the South is a smaller geographical region. This hypothesis could show that, psychologically speaking, the more intensely one identifies with something the more restrictively they imagine it. This question is interesting because it gathers data on a regional identity in the US. Notions of regional identify might be useful information for the state and federal government in designing interstate policies, and understanding regional identification could be relevant for campaign professionals and political scientists. 
 
+
+DATA
+
+This data comes from the 2014 article "Which States Are in the South?" by Walt Hickey from FiveThirtyEight. https://fivethirtyeight.com/features/which-states-are-in-the-south/ This article publishes the results a survey that presented people with a list of 25 US states and asked them to select which ones are part of the South. The main result of the article is a map of the US that shows to what percentage of respondents thought each state was in the South. For this project, I am looking at information gathered from other questions in the survey including level of self-reported Southern identity, age, income, and education. My explanatory variable is one's level of identification with the South. The survey asks people how much Southern identify they consider themselves to have and had four responses choices: none, not much, some, a lot. These are coded as factor variables in the regressions. My outcome variable is the number of states that one reports as making up the south. This is measured as a number from zero to twenty five. Age, income, and education level are all measured in the survey as categories and are also coded as factor variables in the regression.
+
+The below histogram provides a visualization of our dependent variable. 2528 respondents each selected a number of states from a list of 25 possibilities to be included in the South. We are just interested in the number they selected as an indication of their overall view of the size of the South. This research design is cross sectional and asks the number of states included in the south varies with one's level of identification with the region.
 
 ```{r}
 library(tidyverse)
-fn <- read.csv("foxnews.csv")
+ Southy <- read_csv('SouthSunfor R.csv')
 
 # Visualization #1 (GOP Vote Share 2000)
 
 
-ggplot(data = fn, aes(x = subrf2000, y = gopvoteshare2000)) + geom_point() + geom_smooth() +
-  labs(x = "Share of Town Subscribed to Fox News in 2000", y = "Share of Town which voted GOP in 2000",
-       title = "Fox News and GOP Vote Share in 2000",
-       subtitle = "",
-       caption = "Data from 2000") + theme(
-    axis.title.x = element_text(size = 8),
-    axis.title.y = element_text(size = 8)
-  )
+ggplot(data = Southy, aes(x = HowManySouthernStates)) + geom_histogram(bins = 25) +
+  labs(x = "# of States Labelled 'The South'", y = "# of Respondents Labelling this # of States 'The South' ",
+       title = "2528 Takes on the # of Southern States",
+       subtitle = "Respondents Select Southern States from list of 25",
+       caption = "Data from 2014 FiveThirtyEight Article") + theme(
+    axis.title.x = element_text(size = 14),
+    axis.title.y = element_text(size = 11))  
 ```
 
-```{r}
 
-```
 
-```{r}
 
-```
+RESULTS
+
+Our main analysis shows that the number of states one assigns to the South decreases with each additional level of self-reported Southern identity. Compared to those who answered "none" to the question of southern identity, those who answered "not much" thougt on average that the south had about 0.474 fewer states, "some' thought the south had 0.617 fewer states on average, and "a lot" thought the south had 0.914 fewer states on average. With P numbers 0.015, <0.001, and <0.001 respectively, these affects appear strong and signifcantly significant. We can conclude that intensity of indentification with the south and estimation of the size of the South are negatively associated. That is, you tend to think the South is a bit smaller as you identify more strongly with the South. I don't think we can conclude that identifying strongly as a Southerner causes one to think the South is smaller, although that sounds plausible. It could be that regional conception and regional identification are both impacted by group opions, upbringing, and other possible confounders.
+
+
+
+
+
+
 
 ```{r}
 library(tidyverse)
-fn <- read.csv("foxnews.csv") 
+ Southy <- read_csv('SouthSunfor R.csv')
 
-cor(fn$subrf2000, fn$gopvoteshare2000, use = "pairwise")
+ggplot(data = Southy, aes(x = SouthernID, y = HowManySouthernStates)) + geom_jitter(alpha = 0.3) + geom_smooth(method = "loess", se = FALSE) +
+  labs(x = "I Identify as Southern: Not At All, Not Much, Some, A Lot", y = "# of States Labelled 'The South'",
+       title = "Self-identified Southern Identity and Reported Size of 'The South'",
+       subtitle = "2528 Respondents Select Southern States from list of 25, predicted by Southern Identity",
+       caption = "Data from 2014 FiveThirtyEight Article") + theme(
+    axis.title.x = element_text(size = 11),
+    axis.title.y = element_text(size = 11))
+
+southern_states_fit <- lm(HowManySouthernStates ~ as.factor(SouthernID), data = Southy)
+
+modelsummary::modelsummary(southern_states_fit,
+                           statistic = c("s.e. = {std.error}",
+                                         "p = {p.value}"),
+                           gof_map = c("nobs", "r.squared", "adj.r.squared"))
 ```
-Analysis: The above tibble features the number -0.22, which here represents the coefficient which relates a county's level of subscription to Fox News in 2000 to that county's vote share for Republican in the 2000 presidential election. Accepting this coefficient, my analysis would conclude that in 2000, when a county had more subscribers to Fox News, that county's 2000 vote share for the Republican was smaller. However, this analysis could better deal with the missing values for some data points, and it could also  control for potential confounding variables.  
+
+
+
+
+
+
+
+
+
+
+
+```{r}
+ggplot(data = Southy, aes(x = HouseholdIncome, y = SouthernID)) + geom_jitter(alpha = 0.45) + geom_smooth(method = "loess", se = FALSE) + labs(x = "Household Income: 0-25k, 25-50K, 50-100K, 100-150K, 150K+", y = "I Identify as Southern: Not At All, Not Much, Some, A Lot",
+       title = "Household Income and Self-Report Southern Identity",
+       subtitle = "2528 Respondents Report Degree of Self-identification as Southern, Predicted by Income",
+       caption = "Data from 2014 FiveThirtyEight Article") + theme(
+    axis.title.x = element_text(size = 12),
+    axis.title.y = element_text(size = 9))
+
+southern_ID_fit <- lm(SouthernID ~ as.factor(HouseholdIncome), data = Southy)
+
+modelsummary::modelsummary(southern_ID_fit,
+                           statistic = c("s.e. = {std.error}",
+                                         "p = {p.value}"),
+                           gof_map = c("nobs", "r.squared", "adj.r.squared"))
+```
+
+
+
+I wondered if income might predict one's level of Southern identity, but the above plot and regression suggest that income does not predict level of southern identity. Tiny coeffiecient and big P values here suggest no or a very weak association.
+
+CONCLUSION
+
+In conclusion, identifying more strongly with the South predicts that one will think about one fewer US state actually makes up the south. Even when adding age, education, and income as controls in the below regression, the effects of increasing level of self reported southern identity continue to be the biggest effects, and signigicantly significant. I find strong support for my hypothesis. A limitation of the analysis was only having about 2500 respondents and and survey style observation data. With more money and a more suitable study design, I would ask for a continuous thermometer score 0-100 for identification with the South and I would ask far more people to increase the size of the sample.
+
+
+
+
+
+
+
+
+
+
+
+
+
+```{r}
+south_ate <- lm(HowManySouthernStates ~ as.factor(SouthernID)  + as.factor(Age) + as.factor(HouseholdIncome)
+                + as.factor(Education),
+                        data = Southy)
+  
+
+modelsummary::modelsummary(south_ate,
+                           statistic = c("s.e. = {std.error}",
+                                         "p = {p.value}"),
+                           gof_map = c("nobs", "r.squared", "adj.r.squared"))
+```
+
 
